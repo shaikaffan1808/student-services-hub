@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A simple student services hub with study tools, a marks calculator, and feedback."
+    />
+    <meta name="theme-color" content="#f7f8f6" />
+    <title>Student Services Hub</title>
+    <link rel="stylesheet" href="./css/styles.css?v=6" />
+    <script defer src="./js/app.js?v=6"></script>
+  </head>
+  <body>
+    <section class="auth-overlay" id="auth-overlay">
+      <div class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <div class="auth-brand">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>Student Services Hub</span>
+        </div>
+        <p class="eyebrow">Your personal study space</p>
+        <h1 id="auth-title">Welcome back</h1>
+        <p class="auth-description" id="auth-description">Sign in to continue where you left off.</p>
+
+        <form class="auth-form" id="login-form">
+          <label>Email
+            <input id="login-email" type="email" autocomplete="username" required />
+          </label>
+          <label>Password
+            <input id="login-password" type="password" autocomplete="current-password" required />
+          </label>
+          <p class="auth-message" id="login-message" role="alert" hidden></p>
+          <button class="button button-primary auth-submit" type="submit">Sign in</button>
+          <p class="auth-switch">New here? <button type="button" data-auth-mode="signup">Create an account</button></p>
+        </form>
+
+        <form class="auth-form" id="signup-form" hidden>
+          <label>Your name
+            <input id="signup-name" type="text" maxlength="60" autocomplete="name" required />
+          </label>
+          <label>Email
+            <input id="signup-email" type="email" autocomplete="email" required />
+          </label>
+          <label>Password <span class="label-hint">(at least 8 characters)</span>
+            <input id="signup-password" type="password" minlength="8" autocomplete="new-password" required />
+          </label>
+          <label>Confirm password
+            <input id="signup-confirm" type="password" minlength="8" autocomplete="new-password" required />
+          </label>
+          <p class="auth-message" id="signup-message" role="alert" hidden></p>
+          <button class="button button-primary auth-submit" type="submit">Create account</button>
+          <p class="auth-switch">Already have an account? <button type="button" data-auth-mode="login">Sign in</button></p>
+        </form>
+
+        <p class="auth-notice">Your account is saved only in this browser and is not connected to a school account.</p>
+      </div>
+    </section>
+
+    <div class="app" id="app" hidden>
+      <aside class="sidebar">
+        <a class="brand brand-light" href="#dashboard" aria-label="Student Services Hub home">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>Student Services Hub</span>
+        </a>
+
+        <p class="nav-label">Workspace</p>
+        <nav class="side-nav" aria-label="Main navigation">
+          <a class="nav-link" href="#dashboard" data-nav="dashboard">
+            <span aria-hidden="true">⌂</span> Home
+          </a>
+          <a class="nav-link" href="#calculator" data-nav="calculator">
+            <span aria-hidden="true">＋</span> Calculator
+          </a>
+          <a class="nav-link" href="#marks" data-nav="marks">
+            <span aria-hidden="true">%</span> Marks
+          </a>
+          <a class="nav-link" href="#planner" data-nav="planner">
+            <span aria-hidden="true">✓</span> Study planner
+          </a>
+          <a class="nav-link" href="#feedback" data-nav="feedback">
+            <span aria-hidden="true">✉</span> Feedback
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <span class="avatar" id="user-avatar" aria-hidden="true">S</span>
+          <span class="profile-copy"><strong id="user-name">Student</strong><small>Signed in</small></span>
+          <button class="signout-button" type="button" data-signout>Sign out</button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="mobile-header">
+          <a class="brand" href="#dashboard">
+            <span class="brand-mark" aria-hidden="true">S</span>
+            <span>Student Services Hub</span>
+          </a>
+          <button class="signout-button" type="button" data-signout>Sign out</button>
+        </header>
+
+        <div class="content">
+          <section class="page" id="dashboard" data-page="dashboard">
+            <p class="eyebrow">Student Services Hub</p>
+            <h1>Welcome, <span id="welcome-name">student</span><span class="heading-dot">.</span></h1>
+            <p class="intro">Your simple space for study tools and student feedback. Choose a service to get started.</p>
+
+            <div class="section-heading">
+              <div>
+                <h2>Your tools</h2>
+              </div>
+            </div>
+            <div class="tool-grid">
+              <a class="tool-card" href="#calculator">
+                <span class="tool-icon icon-green" aria-hidden="true">÷</span>
+                <span class="tool-copy">
+                  <strong>Calculator</strong>
+                  <span>Do quick calculations for your studies.</span>
+                  <span class="card-link">Open calculator <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+              <a class="tool-card" href="#marks">
+                <span class="tool-icon icon-gold" aria-hidden="true">%</span>
+                <span class="tool-copy">
+                  <strong>Marks calculator</strong>
+                  <span>Find your percentage from marks earned and total marks.</span>
+                  <span class="card-link">Calculate marks <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+              <a class="tool-card" href="#planner">
+                <span class="tool-icon icon-green" aria-hidden="true">✓</span>
+                <span class="tool-copy">
+                  <strong>Study planner</strong>
+                  <span>Keep track of study tasks and due dates.</span>
+                  <span class="card-link">Plan your study <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+              <a class="tool-card" href="#feedback">
+                <span class="tool-icon icon-peach" aria-hidden="true">✉</span>
+                <span class="tool-copy">
+                  <strong>Feedback</strong>
+                  <span>Write a note and keep your feedback on this device.</span>
+                  <span class="card-link">Open feedback form <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+            </div>
+            <p class="privacy-note">Your account and feedback are stored in this browser for this front-end assignment.</p>
+          </section>
+
+          <section class="page" id="calculator" data-page="calculator" hidden>
+            <h1>Calculator<span class="heading-dot">.</span></h1>
+            <p class="intro">A simple calculator for everyday study calculations.</p>
+
+            <div class="calculator-layout">
+              <section class="panel calculator-panel" aria-label="Calculator">
+                <div class="calc-mode">
+                  <div class="calc-screen">
+                    <p class="calc-expression" id="calc-expression" aria-live="polite"></p>
+                    <p class="calc-display" id="calc-display" aria-label="Calculator display">0</p>
+                  </div>
+                  <div class="keypad" id="keypad" aria-label="Calculator keypad">
+                    <button class="key key-soft" type="button" data-key="clear">AC</button>
+                    <button class="key key-soft" type="button" data-key="sign">+/−</button>
+                    <button class="key key-soft" type="button" data-key="percent">%</button>
+                    <button class="key key-operator" type="button" data-key="÷">÷</button>
+                    <button class="key" type="button" data-key="7">7</button>
+                    <button class="key" type="button" data-key="8">8</button>
+                    <button class="key" type="button" data-key="9">9</button>
+                    <button class="key key-operator" type="button" data-key="×">×</button>
+                    <button class="key" type="button" data-key="4">4</button>
+                    <button class="key" type="button" data-key="5">5</button>
+                    <button class="key" type="button" data-key="6">6</button>
+                    <button class="key key-operator" type="button" data-key="−">−</button>
+                    <button class="key" type="button" data-key="1">1</button>
+                    <button class="key" type="button" data-key="2">2</button>
+                    <button class="key" type="button" data-key="3">3</button>
+                    <button class="key key-operator" type="button" data-key="+">+</button>
+                    <button class="key key-soft" type="button" data-key="backspace" aria-label="Delete last digit">⌫</button>
+                    <button class="key" type="button" data-key="0">0</button>
+                    <button class="key" type="button" data-key=".">.</button>
+                    <button class="key key-equals" type="button" data-key="equals">=</button>
+                  </div>
+                  <button class="clear-link" type="button" data-key="clear">↺ &nbsp; Clear all</button>
+                </div>
+
+              </section>
+              <aside class="tip-card">
+                <p class="eyebrow">Quick tip</p>
+                <h2>Study calculations</h2>
+                <p>Use the Marks Calculator to turn your marks into a percentage.</p>
+              </aside>
+            </div>
+          </section>
+
+          <section class="page" id="marks" data-page="marks" hidden>
+            <h1>Marks calculator<span class="heading-dot">.</span></h1>
+            <p class="intro">Enter your marks to calculate your score as a percentage.</p>
+
+            <div class="calculator-layout">
+              <form class="panel calculator-panel score-mode" id="marks-form">
+                <span class="tool-icon icon-gold" aria-hidden="true">%</span>
+                <h2>Calculate your percentage</h2>
+                <p>Enter the marks you earned and the total marks available.</p>
+                <div class="score-inputs">
+                  <label>Marks earned<input id="score-value" type="number" min="0" step="any" placeholder="e.g. 42" required /></label>
+                  <span class="of-label">out of</span>
+                  <label>Total marks<input id="score-total" type="number" min="0.01" step="any" placeholder="e.g. 50" required /></label>
+                </div>
+                <p class="field-error" id="score-error" role="alert" hidden></p>
+                <output class="score-result" id="score-result" hidden></output>
+                <button class="button button-primary submit-button" type="submit">Calculate percentage</button>
+              </form>
+              <aside class="tip-card">
+                <p class="eyebrow">How it works</p>
+                <h2>Marks to percentage</h2>
+                <p>Your earned marks are divided by the total marks, then multiplied by 100.</p>
+              </aside>
+            </div>
+          </section>
+
+          <section class="page" id="planner" data-page="planner" hidden>
+            <h1>Study planner<span class="heading-dot">.</span></h1>
+            <p class="intro">Add study tasks, set optional due dates, and check them off when you finish.</p>
+
+            <section class="panel planner-panel" aria-label="Study planner">
+              <form class="planner-form" id="planner-form">
+                <label>Study task
+                  <input id="task-title" type="text" maxlength="100" placeholder="e.g. Review biology notes" required />
+                </label>
+                <label>Due date <span class="label-hint">(optional)</span>
+                  <input id="task-due-date" type="date" />
+                </label>
+                <button class="button button-primary" type="submit">Add task</button>
+              </form>
+              <div class="planner-summary">
+                <h2>Your tasks</h2>
+                <p id="planner-progress" aria-live="polite">No tasks yet</p>
+              </div>
+              <p class="form-message" id="planner-status" role="status" hidden></p>
+              <div class="planner-list" id="planner-list" aria-live="polite"></div>
+            </section>
+            <p class="privacy-note">Your study plan is saved in this browser and is only visible to your account on this device.</p>
+          </section>
+
+          <section class="page" id="feedback" data-page="feedback" hidden>
+            <h1>Feedback<span class="heading-dot">.</span></h1>
+            <p class="intro">Share a suggestion or note. It will be saved in this browser.</p>
+
+            <div class="feedback-layout">
+              <section class="panel feedback-form-panel">
+                <div class="form-heading">
+                  <span class="tool-icon icon-green" aria-hidden="true">✉</span>
+                  <div><p class="eyebrow">Your voice matters</p><h2>Share your feedback</h2></div>
+                </div>
+                <form id="feedback-form">
+                  <label>What’s this about?
+                    <select id="feedback-category">
+                      <option value="learning">Learning experience</option>
+                      <option value="platform">Student Services Hub</option>
+                      <option value="support">Student support</option>
+                      <option value="other">Something else</option>
+                    </select>
+                  </label>
+                  <label>Your message
+                    <textarea id="feedback-message" minlength="10" maxlength="1200" rows="5" placeholder="What would you like us to know?" required></textarea>
+                    <span class="character-count"><span id="message-count">0</span> / 1200</span>
+                  </label>
+                  <fieldset class="rating-field">
+                    <legend>How was your experience?</legend>
+                    <div class="rating-row">
+                      <div class="stars" role="radiogroup" aria-label="Rating from 1 to 5">
+                        <button type="button" class="star-button" data-rating="1" role="radio" aria-checked="false" aria-label="1 out of 5">★</button>
+                        <button type="button" class="star-button" data-rating="2" role="radio" aria-checked="false" aria-label="2 out of 5">★</button>
+                        <button type="button" class="star-button" data-rating="3" role="radio" aria-checked="false" aria-label="3 out of 5">★</button>
+                        <button type="button" class="star-button" data-rating="4" role="radio" aria-checked="false" aria-label="4 out of 5">★</button>
+                        <button type="button" class="star-button" data-rating="5" role="radio" aria-checked="false" aria-label="5 out of 5">★</button>
+                      </div>
+                      <span class="rating-label" id="rating-label">Choose a rating</span>
+                    </div>
+                  </fieldset>
+                  <p class="form-message" id="feedback-status" role="status" hidden></p>
+                  <button class="button button-primary submit-button" type="submit">Save feedback <span aria-hidden="true">↗</span></button>
+                  <p class="privacy-note">This demo saves feedback in your browser; it does not send it to staff.</p>
+                </form>
+              </section>
+
+              <section class="history">
+                <div class="section-heading history-heading">
+                  <div><p class="eyebrow">Your notes</p><h2>Feedback history</h2></div>
+                  <button class="text-button" type="button" id="clear-feedback" hidden>Clear history</button>
+                </div>
+                <div class="history-list" id="feedback-list" aria-live="polite"></div>
+              </section>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <nav class="mobile-nav" aria-label="Main navigation">
+        <a class="mobile-nav-link" href="#dashboard" data-nav="dashboard"><span aria-hidden="true">⌂</span>Home</a>
+        <a class="mobile-nav-link" href="#calculator" data-nav="calculator"><span aria-hidden="true">＋</span>Calculator</a>
+        <a class="mobile-nav-link" href="#marks" data-nav="marks"><span aria-hidden="true">%</span>Marks</a>
+        <a class="mobile-nav-link" href="#planner" data-nav="planner"><span aria-hidden="true">✓</span>Plan</a>
+        <a class="mobile-nav-link" href="#feedback" data-nav="feedback"><span aria-hidden="true">✉</span>Feedback</a>
+      </nav>
+    </div>
+  </body>
+</html>
